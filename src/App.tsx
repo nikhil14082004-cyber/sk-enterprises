@@ -1,22 +1,52 @@
 
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+  if (!selectedImage) return;
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      setSelectedImage(null);
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [selectedImage]);
   return (
     <div className="website">
-      <nav className="navbar">
-        <a href="#home" className="logo">
-          SK<span> ENTERPRISES</span>
-        </a>
+      
+<nav className="navbar">
+  <a href="#home" className="logo" onClick={() => setMenuOpen(false)}>
+    SK<span> ENTERPRISES</span>
+  </a>
 
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#projects">Gallery</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
+  <button
+    type="button"
+    className="hamburger"
+    onClick={() => setMenuOpen(!menuOpen)}
+    aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+    aria-expanded={menuOpen}
+  >
+    {menuOpen ? "✕" : "☰"}
+  </button>
+
+  <div className={`nav-links ${menuOpen ? "nav-links-open" : ""}`}>
+    <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+    <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+    <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
+    <a href="#projects" onClick={() => setMenuOpen(false)}>Gallery</a>
+    <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+  </div>
+</nav>
+
 
       <main>
         <section className="hero" id="home">
@@ -163,6 +193,7 @@ function App() {
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnfl04mKAkiQc6j4lV58sed24NGoZ4uy_-lXuSAB4z0A&s=10"
           alt="Construction work at a building project"
           loading="lazy"
+           onClick={() => setSelectedImage("https://st2.depositphotos.com/1005682/12186/i/450/depositphotos_121865862-stock-photo-indian-male-electrician.jpg")}
         />
         <span className="project-tag">01 / INSTALLATION</span>
       </div>
@@ -184,6 +215,7 @@ function App() {
           src="https://djelectrocontrols.com/wp-content/uploads/2026/03/Industrial-Power-Distribution-System.jpg"
           alt="Engineering and technical work"
           loading="lazy"
+          onClick={() => setSelectedImage("https://www.tritypipes.com/uploads/concealed-wiring-vs-surface-wiring-which-is-better-for-your-building.jpg")}
         />
         <span className="project-tag">02 / DISTRIBUTION</span>
       </div>
@@ -205,6 +237,7 @@ function App() {
           src="https://www.ankurlighting.com/cdn/shop/articles/things-to-remember-while-designing-a-lighting-plan-for-an-office-ankur-lighting.jpg?v=1695131102"
           alt="Modern commercial office interior"
           loading="lazy"
+          onClick={() => setSelectedImage("https://www.ankurlighting.com/cdn/shop/articles/things-to-remember-while-designing-a-lighting-plan-for-an-office-ankur-lighting.jpg?v=1695131102")}
         />
         <span className="project-tag">03 / LIGHTING</span>
       </div>
@@ -243,18 +276,72 @@ function App() {
   SK Enterprises to discuss your electrical work requirements.
 </p>
 
-          <a
-            className="btn btn-primary"
-            href="mailto:info@skenterprises.com"
-          >
-            Request a Project Enquiry ↗
-          </a>
-          <p className="email-note">
-            Please replace the sample email with your actual business email.
-          </p>
+        <div className="contact-buttons">
+  <a
+    className="btn btn-call"
+    href="tel:+918439184332"
+  >
+    Call Us ↗
+  </a>
+
+  <a
+    className="btn btn-primary"
+    href="mailto:nikhil14082004@gmail.com"
+  >
+    Request a Project Enquiry ↗
+  </a>
+
+  <a
+    className="btn btn-whatsapp"
+    href="https://wa.me/918439184332"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Chat on WhatsApp ↗
+  </a>
+</div>
+          <div className="business-details">
+  <div className="detail-card">
+    <span className="detail-icon">📞</span>
+    <h3>Call Us</h3>
+    <a href="tel:+918439184332">+91 84391 84332</a>
+  </div>
+
+  <div className="detail-card">
+    <span className="detail-icon">✉️</span>
+    <h3>Email Us</h3>
+    <a href="mailto:nikhil14082004@gmail.com">
+      nikhil14082004@gmail.com
+    </a>
+  </div>
+
+  <div className="detail-card">
+    <span className="detail-icon">📍</span>
+    <h3>Our Location</h3>
+    <p>
+      Amwala Uparla, Karanpur, Near MB Homes,
+      Dehradun, Uttarakhand 248013
+    </p>
+    <a
+  className="map-link"
+  href="https://www.google.com/maps/search/?api=1&query=Amwala%20Uparla%20Karanpur%20Dehradun%20248013"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Get Directions ↗
+</a>
+  </div>
+
+  <div className="detail-card">
+    <span className="detail-icon">🕒</span>
+    <h3>Working Hours</h3>
+    <p>Open 24 Hours · 7 Days a Week</p>
+  </div>
+</div>
         </section>
       </main>
 
+      
       <footer className="footer">
         <a href="#home" className="logo">
           SK<span> ENTERPRISES</span>
@@ -262,6 +349,27 @@ function App() {
         <p>© {new Date().getFullYear()} SK Enterprises. All rights reserved.</p>
         <a href="#home">Back to top ↑</a>
       </footer>
+
+      {selectedImage && (
+        <div
+          className="lightbox"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            className="lightbox-close"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close image"
+        >
+          &times;
+          </button>
+
+          <img
+            src={selectedImage}
+            alt="Electrical work enlarged"
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
