@@ -24,9 +24,12 @@ function App() {
     <div className="website">
       
 <nav className="navbar">
-  <a href="#home" className="logo" onClick={() => setMenuOpen(false)}>
-    SK<span> ENTERPRISES</span>
-  </a>
+
+<a href="#home" className="logo" onClick={() => setMenuOpen(false)}>
+  <img src="/sk-logo.png" alt="SK Enterprises Logo" className="logo-image" />
+</a>
+
+
 
   <button
     type="button"
@@ -50,33 +53,40 @@ function App() {
 
       <main>
         <section className="hero" id="home">
-          <div className="hero-content">
-            
-<p className="eyebrow">PROFESSIONAL ELECTRICAL CONTRACTING</p>
+          
+<div className="hero-content">
+  <p className="eyebrow">
+    ELECTRICAL CONTRACTING · CONSTRUCTION · INFRASTRUCTURE
+  </p>
 
-<h1>
-  Powering Buildings.
-  <br />
-  <span>Connecting Futures.</span>
-</h1>
+  <h1>
+    Powering Buildings.
+    <br />
+    <span>Built on Trust.</span>
+  </h1>
 
-<p className="hero-description">
-  SK Enterprises provides professional electrical contracting
-  services for large buildings and commercial construction
-  projects. We focus on electrical installation, building wiring,
-  lighting systems, and quality workmanship with safety in mind.
-</p>
+  <p className="hero-description">
+    Reliable electrical solutions for commercial buildings
+    and construction projects. From building wiring and
+    distribution panels to complete lighting installations,
+    SK Enterprises powers spaces with quality and safety.
+  </p>
 
+  <div className="hero-buttons">
+    <a href="#services" className="btn btn-primary">
+      Explore Our Services ↗
+    </a>
+    <a href="#contact" className="btn btn-outline">
+      Get a Project Quote
+    </a>
+  </div>
 
-            <div className="hero-buttons">
-              <a href="#services" className="btn btn-primary">
-                Explore Services ↗
-              </a>
-              <a href="#about" className="btn btn-outline">
-                Discover More
-              </a>
-            </div>
-          </div>
+  <p className="hero-trust">
+    <span>✦</span> Quality Workmanship
+    <span className="trust-divider">·</span>
+    <span>✦</span> Safety First
+  </p>
+</div>
 
           <div className="hero-visual">
             <div className="orbit orbit-one" />
